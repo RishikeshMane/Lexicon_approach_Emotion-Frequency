@@ -1,3 +1,4 @@
+import csv
 from typing import Counter, List
 import re
 import nltk 
@@ -5,6 +6,62 @@ from nltk import word_tokenize,sent_tokenize
 from nltk.corpus import stopwords
 from nltk.util import filestring, pr
 from matplotlib import pyplot as plt
+from matplotlib.pyplot import figure
+import pandas as pd
+
+
+csvfile=pd.read_csv('tweet_emotions.csv')
+# print(csvfile.head(10))
+csv_content=csvfile['content']
+# csv_sentiment=csvfile['sentiment']
+# csv_senti_count=[]
+# for i in csv_sentiment:
+#     csv_senti_count.append(i)
+# print(csv_senti_count)
+# xcs=Counter(csv_senti_count)
+# print(xcs)
+csv_text=[]
+for i in csv_content:
+    csv_text.append(i)
+
+csv_words=[]
+countsm=1
+for i in csv_text:
+    i = re.sub('[^a-zA-Z]',' ', i)
+    i=i.replace('  ','')
+    i=i.split()
+    for f in i:
+        if not f in set(stopwords.words('english')):
+            csv_words.append(f)
+print(csv_words)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 emotions=open("emotions.txt","r+")
 # emote=emotions.readline()
@@ -44,10 +101,12 @@ for i in emotions:
     count=count+1
     i=i.replace("'",'').replace(",",'').replace("\n",'').strip()
     word,emotion=i.split(':')
-    if word in finaltx:
+    if word in csv_words:
         final_counter.append(emotion)   
     
 ct=Counter(final_counter)
-print(ct)    
+print(ct)
+figure(num=None, figsize=(20,18), dpi=80, facecolor='w', edgecolor='r') 
+plt.xticks(rotation=90)   
 plt.bar(ct.keys(),ct.values())
 plt.show()
