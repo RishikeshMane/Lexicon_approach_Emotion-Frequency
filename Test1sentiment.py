@@ -6,7 +6,7 @@ from nltk.corpus import stopwords
 from nltk.util import filestring, pr
 from matplotlib import pyplot as plt
 
-emotions=open("Sentiment-Analysis\emotions.txt","r+")
+emotions=open("emotions.txt","r+")
 # emote=emotions.readline()
 emotions=emotions.readlines()
 count=0
