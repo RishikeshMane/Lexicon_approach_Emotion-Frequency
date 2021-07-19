@@ -3,7 +3,7 @@ import nltk
 from nltk import word_tokenize,sent_tokenize
 from nltk.corpus import stopwords
 
-emotions=open("Sentiment-Analysis\emotions.txt","r+")
+emotions=open("emotions.txt","r+")
 # emote=emotions.readline()
 emotions=emotions.readlines()
 count=0
